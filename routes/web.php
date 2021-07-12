@@ -24,4 +24,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('daily-activity/{id}', 'DailyActivityController@showDailyActivity');
     $router->put('daily-activity/{id}', 'DailyActivityController@update');
     $router->delete('daily-activity/{id}', 'DailyActivityController@destroy');
+
+    // Assignment
+    $router->post('assignment', 'AssignmentController@store');
+    $router->get('assignment', 'AssignmentController@getAssignment');
+    $router->get('assignment/{id}', 'AssignmentController@showAssignment');
+    $router->put('assignment/{id}', 'AssignmentController@update');
+    $router->delete('assignment/{id}', 'AssignmentController@destroy');
 });
