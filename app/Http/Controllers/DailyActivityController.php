@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\DailyActivity;
+use App\Models\DailyActivity;
 use DB;
 
 class DailyActivityController extends Controller

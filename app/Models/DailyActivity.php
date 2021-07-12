@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ class DailyActivity extends Model {
     protected $primaryKey = 'id_daily_activity';
 
     protected $fillable = [
-        'name_daily_activity', 'description_daily_activity', 'duedate_daily_activity', 'reminder_at', 'priority', 'priority', 'working_status', 'status', 'id_user', 'creaby', 'creadate', 'modiby', 'modidate'
+        'name_daily_activity', 'description_daily_activity', 'duedate_daily_activity', 'reminder_at', 'priority', 'priority', 'working_status', 'status', 'id_user', 'creadate', 'modidate'
     ];
 
     public $timestamps = false;
