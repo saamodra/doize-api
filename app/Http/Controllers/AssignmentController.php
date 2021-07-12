@@ -62,6 +62,10 @@ class AssignmentController extends Controller
                 'data' => ''
             ], 500);
         } else {
+            $requestData = $request->all();
+            $requestData['creadate'] = date('Y-m-d H:i:s');
+            $requestData['modidate'] = date('Y-m-d H:i:s');
+
             $assignment = Assignment::create($request->all());
 
             return response()->json([
@@ -83,6 +87,10 @@ class AssignmentController extends Controller
                 'data' => ''
             ], 500);
         } else {
+            $requestData = $request->all();
+            $requestData['modidate'] = date('Y-m-d H:i:s');
+            unset($requestData['creadate']);
+            
             $assignment = Assignment::findOrFail($id);
             $assignment->update($request->all());
 
