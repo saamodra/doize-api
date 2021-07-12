@@ -26,7 +26,7 @@ class DailyActivityController extends Controller
         $daily_activity = DailyActivity::where('status', 1)->get();
 
         return response([
-            'success' => true,
+            'status' => 200,
             'message' => '',
             'data' => $daily_activity
         ]);
@@ -38,13 +38,13 @@ class DailyActivityController extends Controller
             $daily_activity = DailyActivity::findOrFail($id);
 
             return response([
-                'status' => 'success',
+                'status' => 200,
                 'message' => '',
                 'data' => $daily_activity
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
-                'status' => 'failed',
+                'status' => 500,
                 'message' => 'ID DailyActivity tidak ditemukan',
                 'data' => $id
             ], 404);
@@ -56,7 +56,7 @@ class DailyActivityController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'failed',
+                'status' => 500,
                 'message'=> $validator->errors(),
                 'data' => ''
             ], 500);
@@ -64,7 +64,7 @@ class DailyActivityController extends Controller
             $daily_activity = DailyActivity::create($request->all());
 
             return response()->json([
-                'status' => 'success',
+                'status' => 200,
                 'message'=> 'Data berhasil ditambahkan.',
                 'data' => $daily_activity
             ], 200);
@@ -77,16 +77,20 @@ class DailyActivityController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'failed',
+                'status' => 500,
                 'message'=> $validator->errors(),
                 'data' => ''
             ], 500);
         } else {
+            $requestData = $request->all();
+            $requestData['modidate'] = date('Y-m-d H:i:s');
+            unset($requestData['creadate']);
+
             $daily_activity = DailyActivity::findOrFail($id);
-            $daily_activity->update($request->all());
+            $daily_activity->update($requestData);
 
             return response()->json([
-                'status' => 'success',
+                'status' => 200,
                 'message'=> 'Data berhasil diupdate.',
                 'data' => $daily_activity
             ], 200);
@@ -101,13 +105,13 @@ class DailyActivityController extends Controller
             $daily_activity->update();
 
             return response([
-                'status' => 'success',
+                'status' => 200,
                 'message' => 'Data berhasil dihapus.',
                 'data' => $daily_activity
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
-                'status' => 'failed',
+                'status' => 500,
                 'message' => 'ID DailyActivity tidak ditemukan',
                 'data' => $id
             ], 404);
