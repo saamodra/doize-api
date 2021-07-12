@@ -16,3 +16,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    // DailyActivity
+    $router->post('daily-activity', 'DailyActivityController@store');
+    $router->get('daily-activity', 'DailyActivityController@getDailyActivity');
+    $router->get('daily-activity/{id}', 'DailyActivityController@showDailyActivity');
+    $router->put('daily-activity/{id}', 'DailyActivityController@update');
+    $router->delete('daily-activity/{id}', 'DailyActivityController@destroy');
+});
