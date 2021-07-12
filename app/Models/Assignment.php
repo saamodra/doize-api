@@ -9,7 +9,7 @@ class Assignment extends Model {
     protected $primaryKey = 'id_assignment';
 
     protected $fillable = [
-        'name_assignment', 'description_assignment', 'duedate_assignment', 'reminder_at', 'priority', 'priority', 'working_status', 'status', 'id_user', 'creadate', 'modidate'
+        'name_assignment', 'description_assignment', 'course', 'duedate_assignment', 'reminder_at', 'priority', 'priority', 'working_status', 'status', 'id_user', 'creadate', 'modidate'
     ];
 
     public $timestamps = false;
