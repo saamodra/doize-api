@@ -24,4 +24,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('daily-activity/{id}', 'DailyActivityController@showDailyActivity');
     $router->put('daily-activity/{id}', 'DailyActivityController@update');
     $router->delete('daily-activity/{id}', 'DailyActivityController@destroy');
+
+    // Schedule
+    $router->post('schedule', 'ScheduleController@store');
+    $router->get('schedule', 'ScheduleController@getSchedule');
+    $router->get('schedule/{id}', 'ScheduleController@showSchedule');
+    $router->put('schedule/{id}', 'ScheduleController@update');
+    $router->delete('schedule/{id}', 'ScheduleController@destroy');
 });
