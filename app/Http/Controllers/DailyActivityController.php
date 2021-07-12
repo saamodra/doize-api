@@ -61,7 +61,11 @@ class DailyActivityController extends Controller
                 'data' => ''
             ], 500);
         } else {
-            $daily_activity = DailyActivity::create($request->all());
+            $requestData = $request->all();
+            $requestData['creadate'] = date('Y-m-d H:i:s');
+            $requestData['modidate'] = date('Y-m-d H:i:s');
+
+            $daily_activity = DailyActivity::create($requestData);
 
             return response()->json([
                 'status' => 200,
