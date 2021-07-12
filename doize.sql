@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2021 at 05:46 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- Generation Time: Jul 12, 2021 at 08:35 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,19 +30,27 @@ SET time_zone = "+00:00";
 CREATE TABLE `assignment` (
   `id_assignment` int(11) NOT NULL,
   `name_assignment` varchar(50) NOT NULL,
-  `description_assignment` varchar(255) NOT NULL,
+  `description_assignment` varchar(255) DEFAULT NULL,
   `course` varchar(50) NOT NULL,
-  `duedate_assignment` date NOT NULL,
-  `reminder_at` date NOT NULL,
-  `priority` int(11) NOT NULL,
-  `working_status` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
+  `duedate_assignment` datetime DEFAULT NULL,
+  `reminder_at` datetime DEFAULT NULL,
+  `priority` int(11) NOT NULL DEFAULT 0,
+  `working_status` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 1,
   `id_user` int(11) NOT NULL,
-  `creaby` varchar(50) NOT NULL,
-  `creadate` date NOT NULL,
-  `modiby` varchar(50) NOT NULL,
-  `modidate` date NOT NULL
+  `creadate` datetime NOT NULL DEFAULT current_timestamp(),
+  `modidate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assignment`
+--
+
+INSERT INTO `assignment` (`id_assignment`, `name_assignment`, `description_assignment`, `course`, `duedate_assignment`, `reminder_at`, `priority`, `working_status`, `status`, `id_user`, `creadate`, `modidate`) VALUES
+(1, 'Latihan_P5_2', 'Latihan activity', 'Pemrograman 6', '2021-07-14 23:46:57', '2021-07-13 23:46:57', 0, 0, 1, 1, '2021-07-12 23:47:48', '2021-07-12 23:47:48'),
+(2, 'Latihan spring', 'latihan prg7 spring', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 0, 1, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
+(3, 'Latihan jpa ku prg7', 'latihan prg7 gais', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 0, 1, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
+(4, 'Latihan P6', 'latihan prg6', 'Pemrograman 6', '2021-07-13 21:20:30', '2021-07-13 21:20:30', 0, 0, 1, 1, '2021-07-12 17:41:59', '2021-07-12 17:41:59');
 
 -- --------------------------------------------------------
 
@@ -70,7 +78,7 @@ CREATE TABLE `daily_activity` (
 
 INSERT INTO `daily_activity` (`id_daily_activity`, `name_daily_activity`, `description_daily_activity`, `duedate_daily_activity`, `reminder_at`, `priority`, `working_status`, `status`, `id_user`, `creadate`, `modidate`) VALUES
 (1, 'Nyuci Baju', 'Mencuci Baju', '2021-07-13 21:20:26', '2021-07-12 21:20:26', 1, 0, 1, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
-(2, 'Membeli Sarapan', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 1, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
+(2, 'Membeli Sarapan', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
 (3, 'Tidur', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04');
 
 -- --------------------------------------------------------
@@ -86,11 +94,18 @@ CREATE TABLE `detail_schedule` (
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `id_schedule` int(11) NOT NULL,
-  `creaby` varchar(50) NOT NULL,
-  `creadate` date NOT NULL,
-  `modiby` varchar(50) NOT NULL,
-  `modidate` date NOT NULL
+  `status` int(11) NOT NULL DEFAULT 1,
+  `creadate` datetime NOT NULL DEFAULT current_timestamp(),
+  `modidate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detail_schedule`
+--
+
+INSERT INTO `detail_schedule` (`id_detail_schedule`, `name_detail_schedule`, `day_schedule`, `start_time`, `end_time`, `id_schedule`, `status`, `creadate`, `modidate`) VALUES
+(1, 'Pemrograman 6', 'Selasa', '07:00:00', '12:00:00', 1, 1, '2021-07-13 01:18:32', '2021-07-13 01:27:00'),
+(2, 'Pemrograman 7', 'Rabu', '13:00:00', '16:00:00', 1, 0, '2021-07-13 01:28:24', '2021-07-13 01:28:24');
 
 -- --------------------------------------------------------
 
@@ -101,13 +116,11 @@ CREATE TABLE `detail_schedule` (
 CREATE TABLE `schedule` (
   `id_schedule` int(11) NOT NULL,
   `name_schedule` varchar(50) NOT NULL,
-  `description_schedule` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
+  `description_schedule` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `id_user` int(11) NOT NULL,
-  `creaby` varchar(50) NOT NULL,
-  `creadate` date NOT NULL,
-  `modiby` varchar(50) NOT NULL,
-  `modidate` date NOT NULL
+  `creadate` datetime NOT NULL DEFAULT current_timestamp(),
+  `modidate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -178,7 +191,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignment`
 --
 ALTER TABLE `assignment`
-  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `daily_activity`
@@ -190,7 +203,7 @@ ALTER TABLE `daily_activity`
 -- AUTO_INCREMENT for table `detail_schedule`
 --
 ALTER TABLE `detail_schedule`
-  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `schedule`

@@ -32,6 +32,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('assignment/{id}', 'AssignmentController@update');
     $router->delete('assignment/{id}', 'AssignmentController@destroy');
 
+    // Schedule
+    $router->post('schedule', 'ScheduleController@store');
+    $router->get('schedule', 'ScheduleController@getSchedule');
+    $router->get('schedule/{id}', 'ScheduleController@showSchedule');
+    $router->put('schedule/{id}', 'ScheduleController@update');
+    $router->delete('schedule/{id}', 'ScheduleController@destroy');
+
     // DetailSchedule
     $router->post('detail-schedule', 'DetailScheduleController@store');
     $router->get('detail-schedule', 'DetailScheduleController@getDetailSchedule');
