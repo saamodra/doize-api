@@ -3,13 +3,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Assignment extends Model {
-    protected $table = 'assignment';
+class DetailSchedule extends Model {
+    protected $table = 'detail_schedule';
 
-    protected $primaryKey = 'id_assignment';
+    protected $primaryKey = 'id_detail_schedule';
 
     protected $fillable = [
-        'name_assignment', 'description_assignment', 'course', 'duedate_assignment', 'reminder_at', 'priority', 'working_status', 'status', 'id_user', 'creadate', 'modidate'
+        'name_detail_schedule', 'day_detail_schedule', 'day_schedule', 'start_time', 'end_time', 'id_schedule', 'creadate', 'modidate'
     ];
 
     public $timestamps = false;
