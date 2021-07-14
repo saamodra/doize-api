@@ -13,13 +13,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
+    protected $table = 'user';
+
+    protected $primaryKey = 'id_user';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'first_name', 'last_name', 'birth_date', 'phone', 'email', 'password' ,'status', 'creadate', 'modidate'
     ];
 
     /**
@@ -30,4 +34,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public $timestamps = false;
+
+    /**
+     * Get the user that owns the dailyactivity.
+     */
+
+    public function Schedule() {
+        return $this->hasMany(Schedule::class, 'id_user');
+    }
+
+    public function Assignment() {
+        return $this->hasMany(Assignment::class, 'id_user');
+    }
+
+    public function DailyActivity() {
+        return $this->hasMany(DailyActivity::class, 'id_user');
+    }
 }
