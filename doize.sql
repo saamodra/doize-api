@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2021 at 08:35 PM
+-- Generation Time: Jul 14, 2021 at 03:25 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -123,6 +123,13 @@ CREATE TABLE `schedule` (
   `modidate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`id_schedule`, `name_schedule`, `description_schedule`, `status`, `id_user`, `creadate`, `modidate`) VALUES
+(1, 'Dicoding', 'Ini merupakan schedule dicoding', 1, 1, '2021-07-13 01:37:41', '2021-07-13 01:37:41');
+
 -- --------------------------------------------------------
 
 --
@@ -137,9 +144,9 @@ CREATE TABLE `user` (
   `phone` varchar(13) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `status` int(11) NOT NULL,
-  `creadate` datetime NOT NULL,
-  `modidate` datetime NOT NULL
+  `status` int(11) NOT NULL DEFAULT 1,
+  `creadate` datetime NOT NULL DEFAULT current_timestamp(),
+  `modidate` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -147,7 +154,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `first_name`, `last_name`, `birth_date`, `phone`, `email`, `password`, `status`, `creadate`, `modidate`) VALUES
-(1, 'Samodra', 'Samodra', '2000-12-08', '081234331541', 'samodra.me@gmail.com', 'Samodra1234', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Samodra', 'Samodra', '2000-12-08', '081234331541', 'samodra.me@gmail.com', 'Samodra1234', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Rizki', 'Kurniawati', '2001-05-24', '0895364578867', 'rzkurniawati.s@gmail.com', 'kiky245', 1, '2021-07-14 08:19:44', '2021-07-14 08:21:45'),
+(4, 'Meita', 'Tri Utami', '2002-05-23', '087788664575', 'meita.s@gmail.com', 'meita123', 1, '2021-07-14 08:23:32', '2021-07-14 08:23:32');
 
 --
 -- Indexes for dumped tables
@@ -209,13 +218,13 @@ ALTER TABLE `detail_schedule`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
