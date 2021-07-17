@@ -123,11 +123,12 @@ class UserController extends Controller
             $out = [
                 "status" => 500,
                 "message" => "Login gagal, email tidak terdaftar!",
-                "result"  => [
+                "data"  => [
                     "token" => null,
+                    "user" => null,
                 ]
             ];
-            return response()->json($out, $out['status']);
+            return response()->json($out);
         }
 
         if (Hash::check($password, $user->password)) {
@@ -140,21 +141,23 @@ class UserController extends Controller
             $out = [
                 "status" => 200,
                 "message" => "Login berhasil!",
-                "result"  => [
+                "data"  => [
                     "token" => $newtoken,
+                    "user" => $user,
                 ]
             ];
         } else {
             $out = [
                 "status" => 500,
                 "message" => "Login gagal, password salah!",
-                "result"  => [
+                "data"  => [
                     "token" => null,
+                    "user" => null,
                 ]
             ];
         }
 
-        return response()->json($out, $out['status']);
+        return response()->json($out);
     }
 
     function generateRandomString($length = 80)
