@@ -46,11 +46,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('detail-schedule/{id}', 'DetailScheduleController@update');
     $router->delete('detail-schedule/{id}', 'DetailScheduleController@destroy');
 
-    // User 
-    $router->post('user', 'UserController@store');
+    // User
     $router->get('user', 'UserController@getUser');
     $router->get('user/{id}', 'UserController@showUser');
     $router->put('user/{id}', 'UserController@update');
     $router->delete('user/{id}', 'UserController@destroy');
-    
+
+    // Login Register
+    $router->post('/register', 'UserController@register');
+    $router->post('/login', 'UserController@login');
 });

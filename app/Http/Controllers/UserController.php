@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -48,14 +49,14 @@ class UserController extends Controller
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
-                'status' => 500,
+                'status' => 404,
                 'message' => 'ID User tidak ditemukan',
                 'data' => $id
             ], 404);
         }
     }
 
-    public function store(Request $request) {
+    public function register(Request $request) {
         $validator = Validator::make($request->all(), $this->rules(), $this->pesan);
 
         if ($validator->fails()) {
@@ -68,6 +69,7 @@ class UserController extends Controller
             $requestData = $request->all();
             $requestData['creadate'] = date('Y-m-d H:i:s');
             $requestData['modidate'] = date('Y-m-d H:i:s');
+            $requestData['password'] = Hash::make($requestData['password']);
 
             $user = User::create($requestData);
 
@@ -103,5 +105,66 @@ class UserController extends Controller
                 'data' => $user
             ], 200);
         }
+    }
+
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required|min:6'
+        ]);
+
+        $email = $request->input("email");
+        $password = $request->input("password");
+
+        $user = User::where("email", $email)->first();
+
+        if (!$user) {
+            $out = [
+                "status" => 500,
+                "message" => "Login gagal, email tidak terdaftar!",
+                "result"  => [
+                    "token" => null,
+                ]
+            ];
+            return response()->json($out, $out['status']);
+        }
+
+        if (Hash::check($password, $user->password)) {
+            $newtoken  = $this->generateRandomString();
+
+            $user->update([
+                'token' => $newtoken
+            ]);
+
+            $out = [
+                "status" => 200,
+                "message" => "Login berhasil!",
+                "result"  => [
+                    "token" => $newtoken,
+                ]
+            ];
+        } else {
+            $out = [
+                "status" => 500,
+                "message" => "Login gagal, password salah!",
+                "result"  => [
+                    "token" => null,
+                ]
+            ];
+        }
+
+        return response()->json($out, $out['status']);
+    }
+
+    function generateRandomString($length = 80)
+    {
+        $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $panjang_karakter = strlen($karakkter);
+        $str = '';
+        for ($i = 0; $i < $length; $i++) {
+            $str .= $karakkter[rand(0, $panjang_karakter - 1)];
+        }
+        return $str;
     }
 }
