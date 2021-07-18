@@ -14,17 +14,15 @@ class UserController extends Controller
 {
     public function rules() {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'birth_date' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
+            'name' => 'required',
+            'email' => 'required|unique:user',
             'password' => 'required'
         ];
     }
 
     protected $pesan = [
         'required' => 'Kolom :attribute tidak boleh kosong.',
+        'unique' => 'Email telah terdaftar.',
     ];
 
     public function getUser() {
@@ -123,51 +121,25 @@ class UserController extends Controller
             $out = [
                 "status" => 500,
                 "message" => "Login gagal, email tidak terdaftar!",
-                "data"  => [
-                    "token" => null,
-                    "user" => null,
-                ]
+                "data"  => null
             ];
             return response()->json($out);
         }
 
         if (Hash::check($password, $user->password)) {
-            $newtoken  = $this->generateRandomString();
-
-            $user->update([
-                'token' => $newtoken
-            ]);
-
             $out = [
                 "status" => 200,
                 "message" => "Login berhasil!",
-                "data"  => [
-                    "token" => $newtoken,
-                    "user" => $user,
-                ]
+                "data"  => $user
             ];
         } else {
             $out = [
                 "status" => 500,
                 "message" => "Login gagal, password salah!",
-                "data"  => [
-                    "token" => null,
-                    "user" => null,
-                ]
+                "data"  => null
             ];
         }
 
         return response()->json($out);
-    }
-
-    function generateRandomString($length = 80)
-    {
-        $karakkter = '012345678dssd9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $panjang_karakter = strlen($karakkter);
-        $str = '';
-        for ($i = 0; $i < $length; $i++) {
-            $str .= $karakkter[rand(0, $panjang_karakter - 1)];
-        }
-        return $str;
     }
 }
