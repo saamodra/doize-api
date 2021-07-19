@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 03:25 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Jul 19, 2021 at 07:20 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -77,9 +77,10 @@ CREATE TABLE `daily_activity` (
 --
 
 INSERT INTO `daily_activity` (`id_daily_activity`, `name_daily_activity`, `description_daily_activity`, `duedate_daily_activity`, `reminder_at`, `priority`, `working_status`, `status`, `id_user`, `creadate`, `modidate`) VALUES
-(1, 'Nyuci Baju', 'Mencuci Baju', '2021-07-13 21:20:26', '2021-07-12 21:20:26', 1, 0, 1, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
+(1, 'Nyuci Baju', 'Mencuci Baju', '2021-07-13 21:20:26', '2021-07-12 21:20:26', 1, 0, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
 (2, 'Membeli Sarapan', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
-(3, 'Tidur', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04');
+(3, 'Tidur', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
+(4, 'Tidur 4', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 1, 1, '2021-07-13 09:13:26', '2021-07-13 10:04:50');
 
 -- --------------------------------------------------------
 
@@ -104,8 +105,42 @@ CREATE TABLE `detail_schedule` (
 --
 
 INSERT INTO `detail_schedule` (`id_detail_schedule`, `name_detail_schedule`, `day_schedule`, `start_time`, `end_time`, `id_schedule`, `status`, `creadate`, `modidate`) VALUES
-(1, 'Pemrograman 6', 'Selasa', '07:00:00', '12:00:00', 1, 1, '2021-07-13 01:18:32', '2021-07-13 01:27:00'),
-(2, 'Pemrograman 7', 'Rabu', '13:00:00', '16:00:00', 1, 0, '2021-07-13 01:28:24', '2021-07-13 01:28:24');
+(1, 'Pemrograman 8', 'Selasa', '07:00:00', '12:00:00', 1, 1, '2021-07-13 01:18:32', '2021-07-13 07:54:00'),
+(2, 'Pemrograman 7', 'Rabu', '13:00:00', '16:00:00', 1, 0, '2021-07-13 01:28:24', '2021-07-13 01:28:24'),
+(3, 'Pemrograman 7', 'Rabu', '13:00:00', '16:00:00', 1, 1, '2021-07-13 07:51:21', '2021-07-13 07:51:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doize_user`
+--
+
+CREATE TABLE `doize_user` (
+  `id_user` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `birth_date` date DEFAULT NULL,
+  `phone` varchar(13) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `creadate` datetime NOT NULL,
+  `modidate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doize_user`
+--
+
+INSERT INTO `doize_user` (`id_user`, `name`, `birth_date`, `phone`, `email`, `password`, `status`, `creadate`, `modidate`) VALUES
+(1, 'Samodra', '2000-12-08', '081234331541', 'samodra.me@gmail.com', '$2y$12$rBmJzRClAl6LevV0kz1i4etvcU/JO.VxLoMeVrywQzEg3IbpA8sde', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Meita', '2002-05-23', '087788664575', 'meita.s@gmail.com', '$2y$10$nbjxbTVmKlj4rPG9AgspKu36cNPkfng/fQIIz2OVGxuyst/FASb5u', 1, '2021-07-17 13:56:04', '2021-07-17 13:56:04'),
+(4, 'Andrias', '2002-05-23', '087788664575', 'andrias@gmail.com', '$2y$10$Pc6tyUJOPmDDVsF1.5dh4O6W8GATahXTCnSWAb4Qg5PfepEtTtAAe', 1, '2021-07-19 00:10:29', '2021-07-19 00:10:29'),
+(5, 'Pras', NULL, NULL, 'pras@gmail.com', '$2y$10$t58v7znecisIKq7TmBmyiOTDNSPvZhgmmQDysYZ1gsNkcWGz88L.u', 1, '2021-07-19 00:21:38', '2021-07-19 00:21:38'),
+(6, 'Pras', NULL, NULL, 'prass@gmail.com', '$2y$10$IVZw9t4C2kEDtJ9XpqOJQ.VlTqWdZ8qDUcVxVCf13lvd6FFIdUeia', 1, '2021-07-19 15:53:50', '2021-07-19 15:53:50'),
+(7, 'Pras', NULL, NULL, 'prass12@gmail.com', '$2y$10$fU5.pBX8aBIWjefey1Xgp.MyOkvn11KIamsm3hrD43OS.I5kWDhjy', 1, '2021-07-19 16:20:59', '2021-07-19 16:20:59'),
+(8, 'Iankaco', NULL, NULL, 'iankco@gmail.com', '$2y$10$8cE3Fcw2mJqcQmXds0P3b.CazrN4XzeI3fGyecomtKpr955WnK1xi', 1, '2021-07-19 17:23:50', '2021-07-19 17:23:50'),
+(9, 'test', NULL, NULL, 'test', '$2y$10$L6pzes.DQmJu0SQ2mGwAyeR3Xe8hfgcXYUwsB8j3xcYpi/kjuyz3y', 1, '2021-07-19 18:18:06', '2021-07-19 18:18:06'),
+(10, 'wahyu', NULL, NULL, 'dayat', '$2y$10$g2VuN3E5LvrRFcYEGmqb4OuAdOR3l4JdWlQ0QdmyslWnuwxGXK.bG', 1, '2021-07-19 18:19:09', '2021-07-19 18:19:09');
 
 -- --------------------------------------------------------
 
@@ -122,41 +157,6 @@ CREATE TABLE `schedule` (
   `creadate` datetime NOT NULL DEFAULT current_timestamp(),
   `modidate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`id_schedule`, `name_schedule`, `description_schedule`, `status`, `id_user`, `creadate`, `modidate`) VALUES
-(1, 'Dicoding', 'Ini merupakan schedule dicoding', 1, 1, '2021-07-13 01:37:41', '2021-07-13 01:37:41');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `birth_date` date NOT NULL,
-  `phone` varchar(13) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `creadate` datetime NOT NULL DEFAULT current_timestamp(),
-  `modidate` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id_user`, `first_name`, `last_name`, `birth_date`, `phone`, `email`, `password`, `status`, `creadate`, `modidate`) VALUES
-(1, 'Samodra', 'Samodra', '2000-12-08', '081234331541', 'samodra.me@gmail.com', 'Samodra1234', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Rizki', 'Kurniawati', '2001-05-24', '0895364578867', 'rzkurniawati.s@gmail.com', 'kiky245', 1, '2021-07-14 08:19:44', '2021-07-14 08:21:45'),
-(4, 'Meita', 'Tri Utami', '2002-05-23', '087788664575', 'meita.s@gmail.com', 'meita123', 1, '2021-07-14 08:23:32', '2021-07-14 08:23:32');
 
 --
 -- Indexes for dumped tables
@@ -181,16 +181,16 @@ ALTER TABLE `detail_schedule`
   ADD PRIMARY KEY (`id_detail_schedule`);
 
 --
+-- Indexes for table `doize_user`
+--
+ALTER TABLE `doize_user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id_schedule`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -206,25 +206,25 @@ ALTER TABLE `assignment`
 -- AUTO_INCREMENT for table `daily_activity`
 --
 ALTER TABLE `daily_activity`
-  MODIFY `id_daily_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_daily_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `detail_schedule`
 --
 ALTER TABLE `detail_schedule`
-  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `doize_user`
+--
+ALTER TABLE `doize_user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

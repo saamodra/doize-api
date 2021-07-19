@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Log;
 use DB;
 
 class UserController extends Controller
@@ -57,6 +58,7 @@ class UserController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), $this->rules(), $this->pesan);
 
+        error_log('Register : '.$request);
         if ($validator->fails()) {
             return response()->json([
                 'status' => 500,
@@ -65,9 +67,12 @@ class UserController extends Controller
             ], 500);
         } else {
             $requestData = $request->all();
+            $requestData['birth_date'] = null;
+            $requestData['phone'] = null;
             $requestData['creadate'] = date('Y-m-d H:i:s');
             $requestData['modidate'] = date('Y-m-d H:i:s');
             $requestData['password'] = Hash::make($requestData['password']);
+            // error_log('Register else : '.$requestData);
 
             $user = User::create($requestData);
 
