@@ -107,11 +107,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required|min:6'
-        ]);
-
         $email = $request->input("email");
         $password = $request->input("password");
 
