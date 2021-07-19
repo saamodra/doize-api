@@ -13,7 +13,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    protected $table = 'user';
+    protected $table = 'doize_user';
 
     protected $primaryKey = 'id_user';
 
