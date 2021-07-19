@@ -15,7 +15,7 @@ class UserController extends Controller
     public function rules() {
         return [
             'name' => 'required',
-            'email' => 'required|unique:user',
+            'email' => 'required|unique:doize_user',
             'password' => 'required'
         ];
     }
