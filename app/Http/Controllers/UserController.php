@@ -87,26 +87,31 @@ class UserController extends Controller
         $rules = $this->rules();
         $validator = Validator::make($request->all(), $rules, $this->pesan);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 500,
-                'message'=> $validator->errors(),
-                'data' => ''
-            ], 500);
-        } else {
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 500,
+        //         'message'=> $validator->errors(),
+        //         'data' => ''
+        //     ], 500);
+        // } else {
             $requestData = $request->all();
             $requestData['modidate'] = date('Y-m-d H:i:s');
             unset($requestData['creadate']);
+            error_log($request);
 
             $user = User::findOrFail($id);
             $user->update($requestData);
 
-            return response()->json([
+            $userResponse = response()->json([
+        
                 'status' => 200,
                 'message'=> 'Data berhasil diupdate.',
                 'data' => $user
             ], 200);
-        }
+
+            error_log($userResponse);
+            return $userResponse;
+        // }
     }
 
     public function login(Request $request)
