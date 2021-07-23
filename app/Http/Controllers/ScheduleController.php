@@ -62,6 +62,7 @@ class ScheduleController extends Controller
             ], 500);
         } else {
             $requestData = $request->all();
+            $requestData['status'] = 1;
             $requestData['creadate'] = date('Y-m-d H:i:s');
             $requestData['modidate'] = date('Y-m-d H:i:s');
 

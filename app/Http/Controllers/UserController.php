@@ -72,7 +72,6 @@ class UserController extends Controller
             $requestData['creadate'] = date('Y-m-d H:i:s');
             $requestData['modidate'] = date('Y-m-d H:i:s');
             $requestData['password'] = Hash::make($requestData['password']);
-            // error_log('Register else : '.$requestData);
 
             $user = User::create($requestData);
 
