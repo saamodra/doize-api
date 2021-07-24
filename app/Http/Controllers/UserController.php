@@ -13,7 +13,7 @@ use DB;
 
 class UserController extends Controller
 {
-    public function rules() {
+    public function createRules() {
         return [
             'name' => 'required',
             'email' => 'required|unique:doize_user',
@@ -21,9 +21,16 @@ class UserController extends Controller
         ];
     }
 
+    public function updateRules($id = "") {
+        return [
+            'name' => 'required',
+            'email' => 'required|unique:doize_user,email,'.$id.',id_user',
+        ];
+    }
+
     protected $pesan = [
-        'required' => 'Kolom :attribute tidak boleh kosong.',
-        'unique' => 'Email telah terdaftar.',
+        'required' => ':attribute is required',
+        'unique' => 'Email has been registered',
     ];
 
     public function getUser() {
@@ -49,14 +56,14 @@ class UserController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 404,
-                'message' => 'ID User tidak ditemukan',
+                'message' => 'User ID not found',
                 'data' => $id
             ], 404);
         }
     }
 
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), $this->rules(), $this->pesan);
+        $validator = Validator::make($request->all(), $this->createRules(), $this->pesan);
 
         error_log('Register : '.$request);
         if ($validator->fails()) {
@@ -77,41 +84,37 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil ditambahkan.',
+                'message'=> 'Data added successfully',
                 'data' => $user
             ], 200);
         }
     }
 
     public function update(Request $request, $id) {
-        $rules = $this->rules();
+        $rules = $this->updateRules($id);
         $validator = Validator::make($request->all(), $rules, $this->pesan);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 500,
-        //         'message'=> $validator->errors(),
-        //         'data' => ''
-        //     ], 500);
-        // } else {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 500,
+                'message'=> $validator->errors(),
+                'data' => ''
+            ], 500);
+        } else {
             $requestData = $request->all();
             $requestData['modidate'] = date('Y-m-d H:i:s');
-            unset($requestData['creadate']);
-            error_log($request);
 
             $user = User::findOrFail($id);
             $user->update($requestData);
 
             $userResponse = response()->json([
-        
                 'status' => 200,
-                'message'=> 'Data berhasil diupdate.',
+                'message'=> 'Data updated successfully',
                 'data' => $user
             ], 200);
 
-            error_log($userResponse);
             return $userResponse;
-        // }
+        }
     }
 
     public function login(Request $request)
@@ -124,7 +127,7 @@ class UserController extends Controller
         if (!$user) {
             $out = [
                 "status" => 500,
-                "message" => "Login gagal, email tidak terdaftar!",
+                "message" => "Sign in failed! Email is not registered",
                 "data"  => null
             ];
             return response()->json($out);
@@ -133,13 +136,13 @@ class UserController extends Controller
         if (Hash::check($password, $user->password)) {
             $out = [
                 "status" => 200,
-                "message" => "Login berhasil!",
+                "message" => "Sign in success",
                 "data"  => $user
             ];
         } else {
             $out = [
                 "status" => 500,
-                "message" => "Login gagal, password salah!",
+                "message" => "Sign in failed! wrong password",
                 "data"  => null
             ];
         }
