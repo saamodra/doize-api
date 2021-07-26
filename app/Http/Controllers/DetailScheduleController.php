@@ -26,12 +26,26 @@ class DetailScheduleController extends Controller
     ];
 
     public function getDetailSchedule() {
-        $detail_schedule = DetailSchedule::where('status', 1)->get();
+        $sunday = DetailSchedule::where('day_schedule', 'Sunday')->get();
+        $monday = DetailSchedule::where('day_schedule', 'Monday')->get();
+        $tuesday = DetailSchedule::where('day_schedule', 'Tuesday')->get();
+        $wednesday = DetailSchedule::where('day_schedule', 'Wednesday')->get();
+        $thursday = DetailSchedule::where('day_schedule', 'Thursday')->get();
+        $friday = DetailSchedule::where('day_schedule', 'Friday')->get();
+        $saturday = DetailSchedule::where('day_schedule', 'Saturday')->get();
 
         return response([
             'status' => 200,
             'message' => '',
-            'data' => $detail_schedule
+            'data' => [
+                'sunday' => $sunday,
+                'monday' => $monday,
+                'tuesday' => $tuesday,
+                'wednesday' => $wednesday,
+                'thursday' => $thursday,
+                'friday' => $friday,
+                'saturday' => $saturday
+            ]
         ]);
     }
 
