@@ -25,27 +25,61 @@ class DetailScheduleController extends Controller
         'required' => 'Kolom :attribute tidak boleh kosong.',
     ];
 
-    public function getDetailSchedule() {
-        $sunday = DetailSchedule::where('day_schedule', 'Sunday')->get();
-        $monday = DetailSchedule::where('day_schedule', 'Monday')->get();
-        $tuesday = DetailSchedule::where('day_schedule', 'Tuesday')->get();
-        $wednesday = DetailSchedule::where('day_schedule', 'Wednesday')->get();
-        $thursday = DetailSchedule::where('day_schedule', 'Thursday')->get();
-        $friday = DetailSchedule::where('day_schedule', 'Friday')->get();
-        $saturday = DetailSchedule::where('day_schedule', 'Saturday')->get();
+    public function getDetailSchedule(Request $request) {
+        $id_schedule = $request->get('schedule', 1);
+        $sunday = DetailSchedule::where([
+            ['day_schedule', '=', 'Sunday'],
+            ['id_schedule', '=', $id_schedule],
+        ])->get();
+
+        $monday = DetailSchedule::where([
+            ['day_schedule', '=', 'Monday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        $tuesday = DetailSchedule::where([
+            ['day_schedule', '=', 'Tuesday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        $wednesday = DetailSchedule::where([
+            ['day_schedule', '=', 'Wednesday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        $thursday = DetailSchedule::where([
+            ['day_schedule', '=', 'Thursday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        $friday = DetailSchedule::where([
+            ['day_schedule', '=', 'Friday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        $saturday = DetailSchedule::where([
+            ['day_schedule', '=', 'Saturday'],
+            ['id_schedule', '=', $id_schedule]
+        ])->get();
+
+        // return response([
+        //     'status' => 200,
+        //     'message' => '',
+        //     'data' => [
+        //         'sunday' => $sunday,
+        //         'monday' => $monday,
+        //         'tuesday' => $tuesday,
+        //         'wednesday' => $wednesday,
+        //         'thursday' => $thursday,
+        //         'friday' => $friday,
+        //         'saturday' => $saturday
+        //     ]
+        // ]);
 
         return response([
             'status' => 200,
             'message' => '',
-            'data' => [
-                'sunday' => $sunday,
-                'monday' => $monday,
-                'tuesday' => $tuesday,
-                'wednesday' => $wednesday,
-                'thursday' => $thursday,
-                'friday' => $friday,
-                'saturday' => $saturday
-            ]
+            'data' => [$sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday]
         ]);
     }
 
