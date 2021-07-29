@@ -9,7 +9,7 @@ class DetailSchedule extends Model {
     protected $primaryKey = 'id_detail_schedule';
 
     protected $fillable = [
-        'name_detail_schedule', 'day_detail_schedule', 'day_schedule', 'start_time', 'end_time', 'id_schedule', 'status', 'creadate', 'modidate'
+        'name_detail_schedule', 'day_detail_schedule', 'day_schedule', 'start_time', 'end_time', 'id_schedule', 'creadate', 'modidate'
     ];
 
     public $timestamps = false;

@@ -27,6 +27,7 @@ class DetailScheduleController extends Controller
 
     public function getDetailSchedule(Request $request) {
         $id_schedule = $request->get('schedule', 1);
+
         $sunday = DetailSchedule::where([
             ['day_schedule', '=', 'Sunday'],
             ['id_schedule', '=', $id_schedule],
@@ -61,20 +62,6 @@ class DetailScheduleController extends Controller
             ['day_schedule', '=', 'Saturday'],
             ['id_schedule', '=', $id_schedule]
         ])->get();
-
-        // return response([
-        //     'status' => 200,
-        //     'message' => '',
-        //     'data' => [
-        //         'sunday' => $sunday,
-        //         'monday' => $monday,
-        //         'tuesday' => $tuesday,
-        //         'wednesday' => $wednesday,
-        //         'thursday' => $thursday,
-        //         'friday' => $friday,
-        //         'saturday' => $saturday
-        //     ]
-        // ]);
 
         return response([
             'status' => 200,
@@ -156,8 +143,7 @@ class DetailScheduleController extends Controller
     {
         try {
             $detail_schedule = DetailSchedule::findOrFail($id);
-            $detail_schedule->status = 0;
-            $detail_schedule->update();
+            $detail_schedule->delete();
 
             return response([
                 'status' => 200,
