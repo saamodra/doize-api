@@ -27,7 +27,7 @@ class AssignmentController extends Controller
         $assignment = Assignment::where('status', 1)->get();
 
         return response([
-            'success' => true,
+            'status' => 200,
             'message' => '',
             'data' => $assignment
         ]);
@@ -39,13 +39,13 @@ class AssignmentController extends Controller
             $assignment = Assignment::findOrFail($id);
 
             return response([
-                'status' => 'success',
+                'status' => 200,
                 'message' => '',
                 'data' => $assignment
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
-                'status' => 'failed',
+                'status' => 500,
                 'message' => 'ID Assignment tidak ditemukan',
                 'data' => $id
             ], 404);
@@ -57,7 +57,7 @@ class AssignmentController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'failed',
+                'status' => 500,
                 'message'=> $validator->errors(),
                 'data' => ''
             ], 500);
@@ -69,7 +69,7 @@ class AssignmentController extends Controller
             $assignment = Assignment::create($request->all());
 
             return response()->json([
-                'status' => 'success',
+                'status' => 200,
                 'message'=> 'Data berhasil ditambahkan.',
                 'data' => $assignment
             ], 200);
@@ -82,7 +82,7 @@ class AssignmentController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'failed',
+                'status' => 500,
                 'message'=> $validator->errors(),
                 'data' => ''
             ], 500);
@@ -90,12 +90,12 @@ class AssignmentController extends Controller
             $requestData = $request->all();
             $requestData['modidate'] = date('Y-m-d H:i:s');
             unset($requestData['creadate']);
-            
+
             $assignment = Assignment::findOrFail($id);
             $assignment->update($request->all());
 
             return response()->json([
-                'status' => 'success',
+                'status' => 200,
                 'message'=> 'Data berhasil diupdate.',
                 'data' => $assignment
             ], 200);
@@ -110,13 +110,13 @@ class AssignmentController extends Controller
             $assignment->update();
 
             return response([
-                'status' => 'success',
+                'status' => 200,
                 'message' => 'Data berhasil dihapus.',
                 'data' => $assignment
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
-                'status' => 'failed',
+                'status' => 500,
                 'message' => 'ID Assignment tidak ditemukan',
                 'data' => $id
             ], 404);
