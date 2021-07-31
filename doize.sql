@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2021 at 07:14 PM
+-- Generation Time: Jul 31, 2021 at 08:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -47,10 +47,11 @@ CREATE TABLE `assignment` (
 --
 
 INSERT INTO `assignment` (`id_assignment`, `name_assignment`, `description_assignment`, `course`, `duedate_assignment`, `reminder_at`, `priority`, `working_status`, `status`, `id_user`, `creadate`, `modidate`) VALUES
-(1, 'Latihan_P5_2', 'Latihan activity', 'Pemrograman 6', '2021-07-14 23:46:57', '2021-07-13 23:46:57', 0, 0, 1, 1, '2021-07-12 23:47:48', '2021-07-12 23:47:48'),
-(2, 'Latihan spring', 'latihan prg7 spring', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 0, 1, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
-(3, 'Latihan jpa ku prg7', 'latihan prg7 gais', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 0, 1, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
-(4, 'Latihan P6', 'latihan prg6', 'Pemrograman 6', '2021-07-13 21:20:30', '2021-07-13 21:20:30', 0, 0, 1, 1, '2021-07-12 17:41:59', '2021-07-12 17:41:59');
+(1, 'Latihan_P5_3', 'Latihan activity', 'Pemrograman 7', '2021-07-06 10:45:00', '2021-07-05 02:46:00', 1, 0, 1, 1, '2021-07-12 23:47:48', '2021-07-12 23:47:48'),
+(2, 'Latihan spring', 'latihan prg7 spring', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
+(3, 'Latihan jpa ku prg7', 'latihan prg7 gais', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 1, 1, 0, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
+(4, 'Latihan P6', 'latihan prg6', 'Pemrograman 6', '2021-07-13 21:20:30', '2021-07-13 21:20:30', 0, 0, 1, 1, '2021-07-12 17:41:59', '2021-07-12 17:41:59'),
+(5, 'asd', 'asdasd', 'asd', '2021-07-12 12:57:00', '2021-07-14 07:57:00', 1, 0, 0, 0, '2021-07-31 14:57:22', '2021-07-31 14:57:22');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,6 @@ CREATE TABLE `detail_schedule` (
 --
 
 INSERT INTO `detail_schedule` (`id_detail_schedule`, `name_detail_schedule`, `day_schedule`, `start_time`, `end_time`, `id_schedule`, `creadate`, `modidate`) VALUES
-(2, 'Pemrograman 6', 'Selasa', '07:00:00', '12:00:00', 1, '2021-07-13 01:28:24', '2021-07-29 23:40:35'),
 (3, 'Pemrograman 7', 'Wednesday', '13:00:00', '16:00:00', 1, '2021-07-13 07:51:21', '2021-07-13 07:51:21'),
 (4, 'Pemrograman 7', 'Thursday', '13:00:00', '16:00:00', 1, '2021-07-27 18:24:02', '2021-07-27 18:24:02'),
 (9, 'Pemrograman 6', 'Tuesday', '09:30:00', '12:30:00', 1, '2021-07-29 19:12:00', '2021-07-29 23:57:47'),
@@ -146,6 +146,44 @@ INSERT INTO `doize_user` (`id_user`, `name`, `birth_date`, `phone`, `email`, `pa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pomodoro`
+--
+
+CREATE TABLE `pomodoro` (
+  `id_pomodoro` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `productivity_time` time NOT NULL DEFAULT '00:25:00',
+  `count` int(11) NOT NULL DEFAULT 1,
+  `saved_time` time NOT NULL DEFAULT '00:00:00',
+  `short_break` time NOT NULL DEFAULT '00:05:00',
+  `long_break` time NOT NULL DEFAULT '00:15:00',
+  `modidate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pomodoro`
+--
+
+INSERT INTO `pomodoro` (`id_pomodoro`, `id_user`, `productivity_time`, `count`, `saved_time`, `short_break`, `long_break`, `modidate`) VALUES
+(1, 1, '00:20:00', 2, '00:13:25', '00:10:00', '00:15:00', '2021-07-31 17:53:07'),
+(2, 3, '00:25:00', 1, '00:00:00', '00:05:00', '00:15:00', '2021-07-31 17:54:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pomodoro_activity`
+--
+
+CREATE TABLE `pomodoro_activity` (
+  `id_pomodoro_activity` int(11) NOT NULL,
+  `id_pomodoro` int(11) NOT NULL,
+  `activity_name` varchar(100) NOT NULL,
+  `working_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schedule`
 --
 
@@ -165,13 +203,13 @@ CREATE TABLE `schedule` (
 
 INSERT INTO `schedule` (`id_schedule`, `name_schedule`, `description_schedule`, `status`, `id_user`, `creadate`, `modidate`) VALUES
 (1, 'Poltek Astra', 'Jadwal Kuliah MI 2019 Politeknik Astra', 1, 1, '2021-07-22 18:45:34', '2021-07-22 18:45:34'),
-(2, 'Poltek Astra', 'Jadwal Kuliah MI 2018 Poltek Astra', 1, 1, '2021-07-22 18:45:56', '2021-07-22 18:45:56'),
-(3, 'Dicoding', 'Ini merupakan schedule dicoding', 1, 1, '2021-07-22 21:36:55', '2021-07-22 21:36:55'),
-(10, 'Binus', 'Kuliah Binus', 1, 1, '2021-07-27 01:23:34', '2021-07-27 01:23:34'),
-(11, 'tes', 'tes', 1, 1, '2021-07-27 08:16:17', '2021-07-27 08:16:17'),
-(12, 'Test2', 'test3', 1, 1, '2021-07-27 09:32:30', '2021-07-27 09:32:30'),
-(13, 'asda', 'sdasd', 1, 1, '2021-07-29 18:56:47', '2021-07-29 18:56:47'),
-(14, 'asdzxc', 'zxczxc', 1, 1, '2021-07-29 18:56:57', '2021-07-29 18:56:57');
+(2, 'Poltek Astra', 'Jadwal Kuliah MI 2018 Poltek Astra', 1, 1, '2021-07-22 18:45:56', '2021-07-30 09:28:36'),
+(3, 'IDCamp', 'IDCamp 2021', 1, 1, '2021-07-22 21:36:55', '2021-07-30 10:09:19'),
+(10, 'Binus', 'Kuliah Binus', 0, 1, '2021-07-27 01:23:34', '2021-07-30 09:04:42'),
+(11, 'tes', 'tes', 0, 1, '2021-07-27 08:16:17', '2021-07-30 09:47:18'),
+(12, 'Test2', 'test3', 0, 1, '2021-07-27 09:32:30', '2021-07-30 09:04:37'),
+(13, 'asda', 'sdasd', 0, 1, '2021-07-29 18:56:47', '2021-07-29 18:56:47'),
+(14, 'asdzxc', 'zxczxc', 0, 1, '2021-07-29 18:56:57', '2021-07-29 18:56:57');
 
 --
 -- Indexes for dumped tables
@@ -202,6 +240,20 @@ ALTER TABLE `doize_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indexes for table `pomodoro`
+--
+ALTER TABLE `pomodoro`
+  ADD PRIMARY KEY (`id_pomodoro`),
+  ADD KEY `pomodoro_user` (`id_user`);
+
+--
+-- Indexes for table `pomodoro_activity`
+--
+ALTER TABLE `pomodoro_activity`
+  ADD PRIMARY KEY (`id_pomodoro_activity`),
+  ADD KEY `pomodoro_activity_pomodoro` (`id_pomodoro`);
+
+--
 -- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
@@ -215,7 +267,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `assignment`
 --
 ALTER TABLE `assignment`
-  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `daily_activity`
@@ -236,10 +288,38 @@ ALTER TABLE `doize_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `pomodoro`
+--
+ALTER TABLE `pomodoro`
+  MODIFY `id_pomodoro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pomodoro_activity`
+--
+ALTER TABLE `pomodoro_activity`
+  MODIFY `id_pomodoro_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
   MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pomodoro`
+--
+ALTER TABLE `pomodoro`
+  ADD CONSTRAINT `pomodoro_user` FOREIGN KEY (`id_user`) REFERENCES `doize_user` (`id_user`);
+
+--
+-- Constraints for table `pomodoro_activity`
+--
+ALTER TABLE `pomodoro_activity`
+  ADD CONSTRAINT `pomodoro_activity_pomodoro` FOREIGN KEY (`id_pomodoro`) REFERENCES `pomodoro` (`id_pomodoro`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

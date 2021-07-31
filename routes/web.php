@@ -55,4 +55,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Login Register
     $router->post('/register', 'UserController@register');
     $router->post('/login', 'UserController@login');
+
+    // Pomodoro
+    $router->get('pomodoro/{id}', 'PomodoroController@getPomodoro');
+    $router->post('pomodoro', 'PomodoroController@store');
+    $router->put('pomodoro/{id}', 'PomodoroController@update');
+
+    // Pomodoro Activity
+    $router->post('pomodoro-activity', 'PomodoroActivityController@store');
+    $router->get('pomodoro-activity/{id}', 'PomodoroActivityController@getPomodoroActivity');
+    $router->put('pomodoro-activity/{id}', 'PomodoroActivityController@update');
+    $router->delete('pomodoro-activity/{id}', 'PomodoroActivityController@destroy');
 });
