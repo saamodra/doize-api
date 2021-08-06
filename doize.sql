@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2021 at 08:01 PM
+-- Generation Time: Aug 06, 2021 at 08:53 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -47,11 +47,12 @@ CREATE TABLE `assignment` (
 --
 
 INSERT INTO `assignment` (`id_assignment`, `name_assignment`, `description_assignment`, `course`, `duedate_assignment`, `reminder_at`, `priority`, `working_status`, `status`, `id_user`, `creadate`, `modidate`) VALUES
-(1, 'Latihan_P5_3', 'Latihan activity', 'Pemrograman 7', '2021-07-06 10:45:00', '2021-07-05 02:46:00', 1, 0, 1, 1, '2021-07-12 23:47:48', '2021-07-12 23:47:48'),
+(1, 'Latihan_P5_3', 'Latihan activity', 'Pemrograman 7', '2021-07-06 10:45:00', '2021-07-05 02:46:00', 1, 0, 0, 1, '2021-07-12 23:47:48', '2021-07-12 23:47:48'),
 (2, 'Latihan spring', 'latihan prg7 spring', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
 (3, 'Latihan jpa ku prg7', 'latihan prg7 gais', 'Pemrograman 7', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 1, 1, 0, 1, '2021-07-13 21:20:26', '2021-07-13 21:20:26'),
 (4, 'Latihan P6', 'latihan prg6', 'Pemrograman 6', '2021-07-13 21:20:30', '2021-07-13 21:20:30', 0, 0, 1, 1, '2021-07-12 17:41:59', '2021-07-12 17:41:59'),
-(5, 'asd', 'asdasd', 'asd', '2021-07-12 12:57:00', '2021-07-14 07:57:00', 1, 0, 0, 0, '2021-07-31 14:57:22', '2021-07-31 14:57:22');
+(5, 'asd', 'asdasd', 'asd', '2021-07-12 12:57:00', '2021-07-14 07:57:00', 1, 0, 0, 0, '2021-07-31 14:57:22', '2021-07-31 14:57:22'),
+(6, 'Review PRG6', 'prg6', 'PRG6', '2021-08-03 07:59:00', '2021-08-03 06:59:00', 0, 1, 0, 0, '2021-08-03 00:59:30', '2021-08-03 00:59:30');
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,11 @@ INSERT INTO `daily_activity` (`id_daily_activity`, `name_daily_activity`, `descr
 (1, 'Nyuci Baju', 'Mencuci Baju', '2021-07-13 21:20:26', '2021-07-12 21:20:26', 1, 0, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
 (2, 'Membeli Sarapan', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
 (3, 'Tidur', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 0, 1, '2021-07-12 21:21:04', '2021-07-12 21:21:04'),
-(4, 'Tidur 4', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 1, 1, '2021-07-13 09:13:26', '2021-07-13 10:04:50');
+(4, 'Tidur 4', 'Ini kita beli sarapan ges', '2021-07-13 21:20:26', '2021-07-13 21:20:26', 0, 1, 1, 1, '2021-07-13 09:13:26', '2021-07-13 10:04:50'),
+(5, 'Olahraga Siang', 'Nice', '2021-08-03 05:44:00', '2021-08-10 00:44:00', 1, 0, 0, 0, '2021-08-02 12:44:36', '2021-08-02 12:45:28'),
+(6, 'Olahraga Sore', 'asd', '2021-08-18 11:58:00', '2021-08-10 11:50:00', 0, 0, 1, 0, '2021-08-02 23:59:46', '2021-08-03 07:42:06'),
+(7, 'Mencuci', 'Mencuci baju', '2021-08-09 11:00:00', '2021-08-09 10:00:00', 1, 0, 0, 0, '2021-08-03 07:42:42', '2021-08-03 07:42:42'),
+(8, 'Olahraga Pagi', 'ts', '2021-08-04 07:00:00', '2021-08-03 06:58:00', 0, 0, 0, 0, '2021-08-03 07:58:39', '2021-08-03 07:58:58');
 
 -- --------------------------------------------------------
 
@@ -166,7 +171,8 @@ CREATE TABLE `pomodoro` (
 
 INSERT INTO `pomodoro` (`id_pomodoro`, `id_user`, `productivity_time`, `count`, `saved_time`, `short_break`, `long_break`, `modidate`) VALUES
 (1, 1, '00:20:00', 2, '00:13:25', '00:10:00', '00:15:00', '2021-07-31 17:53:07'),
-(2, 3, '00:25:00', 1, '00:00:00', '00:05:00', '00:15:00', '2021-07-31 17:54:14');
+(2, 3, '00:25:00', 1, '00:00:00', '00:05:00', '00:15:00', '2021-07-31 17:54:14'),
+(4, 5, '00:25:00', 1, '00:00:00', '00:05:00', '00:15:00', '2021-08-04 04:55:36');
 
 -- --------------------------------------------------------
 
@@ -178,8 +184,18 @@ CREATE TABLE `pomodoro_activity` (
   `id_pomodoro_activity` int(11) NOT NULL,
   `id_pomodoro` int(11) NOT NULL,
   `activity_name` varchar(100) NOT NULL,
-  `working_status` int(11) NOT NULL
+  `working_status` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pomodoro_activity`
+--
+
+INSERT INTO `pomodoro_activity` (`id_pomodoro_activity`, `id_pomodoro`, `activity_name`, `working_status`, `status`) VALUES
+(2, 1, 'Ngoding', 1, 0),
+(4, 1, 'Makan Nasi', 1, 1),
+(6, 1, 'Dashboard', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -203,8 +219,8 @@ CREATE TABLE `schedule` (
 
 INSERT INTO `schedule` (`id_schedule`, `name_schedule`, `description_schedule`, `status`, `id_user`, `creadate`, `modidate`) VALUES
 (1, 'Poltek Astra', 'Jadwal Kuliah MI 2019 Politeknik Astra', 1, 1, '2021-07-22 18:45:34', '2021-07-22 18:45:34'),
-(2, 'Poltek Astra', 'Jadwal Kuliah MI 2018 Poltek Astra', 1, 1, '2021-07-22 18:45:56', '2021-07-30 09:28:36'),
-(3, 'IDCamp', 'IDCamp 2021', 1, 1, '2021-07-22 21:36:55', '2021-07-30 10:09:19'),
+(2, 'Poltek Astra', 'Jadwal Kuliah MI 2018 Poltek Astra', 1, 1, '2021-07-22 18:45:56', '2021-08-03 00:46:54'),
+(3, 'Dicoding11', 'IDCamp 2021', 1, 1, '2021-07-22 21:36:55', '2021-08-03 07:58:01'),
 (10, 'Binus', 'Kuliah Binus', 0, 1, '2021-07-27 01:23:34', '2021-07-30 09:04:42'),
 (11, 'tes', 'tes', 0, 1, '2021-07-27 08:16:17', '2021-07-30 09:47:18'),
 (12, 'Test2', 'test3', 0, 1, '2021-07-27 09:32:30', '2021-07-30 09:04:37'),
@@ -267,19 +283,19 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `assignment`
 --
 ALTER TABLE `assignment`
-  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_assignment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `daily_activity`
 --
 ALTER TABLE `daily_activity`
-  MODIFY `id_daily_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_daily_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `detail_schedule`
 --
 ALTER TABLE `detail_schedule`
-  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_detail_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `doize_user`
@@ -291,13 +307,13 @@ ALTER TABLE `doize_user`
 -- AUTO_INCREMENT for table `pomodoro`
 --
 ALTER TABLE `pomodoro`
-  MODIFY `id_pomodoro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pomodoro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pomodoro_activity`
 --
 ALTER TABLE `pomodoro_activity`
-  MODIFY `id_pomodoro_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pomodoro_activity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `schedule`

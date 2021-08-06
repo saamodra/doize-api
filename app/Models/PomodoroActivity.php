@@ -9,7 +9,7 @@ class PomodoroActivity extends Model {
     protected $primaryKey = 'id_pomodoro_activity';
 
     protected $fillable = [
-        'id_pomodoro', 'activity_name', 'working_status'
+        'id_pomodoro', 'activity_name', 'working_status', 'status'
     ];
 
     public $timestamps = false;

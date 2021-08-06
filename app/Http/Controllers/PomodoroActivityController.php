@@ -12,7 +12,10 @@ use DB;
 class PomodoroActivityController extends Controller
 {
     public function getPomodoroActivity($id) {
-        $pomodoro_activity = PomodoroActivity::where('id_pomodoro', $id)->get();
+        $pomodoro_activity = PomodoroActivity::where([
+            ['id_pomodoro', '=', $id],
+            ['status', '=', 1]
+        ])->get();
 
         return response([
             'status' => 200,
@@ -51,7 +54,8 @@ class PomodoroActivityController extends Controller
     {
         try {
             $pomodoro_activity = PomodoroActivity::findOrFail($id);
-            $pomodoro_activity->delete();
+            $pomodoro_activity->status = 0;
+            $pomodoro_activity->update();
 
             return response([
                 'status' => 200,
