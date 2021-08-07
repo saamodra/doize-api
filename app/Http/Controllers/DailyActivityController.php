@@ -22,8 +22,11 @@ class DailyActivityController extends Controller
         'required' => 'Kolom :attribute tidak boleh kosong.',
     ];
 
-    public function getDailyActivity() {
-        $daily_activity = DailyActivity::where('status', 1)->get();
+    public function getDailyActivity($id) {
+        $daily_activity = DailyActivity::where([
+            ['status', '=', 1],
+            ['id_user', '=', $id]
+        ])->get();
 
         return response([
             'status' => 200,

@@ -20,14 +20,14 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     // DailyActivity
     $router->post('daily-activity', 'DailyActivityController@store');
-    $router->get('daily-activity', 'DailyActivityController@getDailyActivity');
+    $router->get('daily-activities/{id}', 'DailyActivityController@getDailyActivity');
     $router->get('daily-activity/{id}', 'DailyActivityController@showDailyActivity');
     $router->put('daily-activity/{id}', 'DailyActivityController@update');
     $router->delete('daily-activity/{id}', 'DailyActivityController@destroy');
 
     // Assignment
     $router->post('assignment', 'AssignmentController@store');
-    $router->get('assignment', 'AssignmentController@getAssignment');
+    $router->get('assignments/{id}', 'AssignmentController@getAssignment');
     $router->get('assignment/{id}', 'AssignmentController@showAssignment');
     $router->put('assignment/{id}', 'AssignmentController@update');
     $router->delete('assignment/{id}', 'AssignmentController@destroy');
