@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\Models\Schedule;
 use App\Models\DetailSchedule;
 use DB;
 
@@ -67,6 +68,20 @@ class DetailScheduleController extends Controller
             'status' => 200,
             'message' => '',
             'data' => [$sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday]
+        ]);
+    }
+
+    public function getDetailScheduleByUser($idUser) {
+        $todaySchedules = Schedule::with(['detailSchedule' => function($q) {
+            $q->where('day_schedule', date('l', strtotime(date('Y-m-d'))));
+        }])->whereHas('detailSchedule', function($q) {
+            $q->where('day_schedule', date('l', strtotime(date('Y-m-d'))));
+        })->where('id_user', $idUser)->get();
+
+        return response([
+            'status' => 200,
+            'message' => '',
+            'data' => $todaySchedules
         ]);
     }
 

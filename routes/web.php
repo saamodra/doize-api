@@ -34,7 +34,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Schedule
     $router->post('schedule', 'ScheduleController@store');
-    $router->get('schedule', 'ScheduleController@getSchedule');
+    $router->get('schedules/{idUser}', 'ScheduleController@getSchedule');
     $router->get('schedule/{id}', 'ScheduleController@showSchedule');
     $router->put('schedule/{id}', 'ScheduleController@update');
     $router->delete('schedule/{id}', 'ScheduleController@destroy');
@@ -42,6 +42,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // DetailSchedule
     $router->post('detail-schedule', 'DetailScheduleController@store');
     $router->get('detail-schedule', 'DetailScheduleController@getDetailSchedule');
+    $router->get('detail-schedule-user/{idUser}', 'DetailScheduleController@getDetailScheduleByUser');
     $router->get('detail-schedule/{id}', 'DetailScheduleController@showDetailSchedule');
     $router->put('detail-schedule/{id}', 'DetailScheduleController@update');
     $router->delete('detail-schedule/{id}', 'DetailScheduleController@destroy');

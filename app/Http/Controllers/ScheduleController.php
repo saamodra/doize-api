@@ -22,8 +22,11 @@ class ScheduleController extends Controller
         'required' => 'Kolom :attribute tidak boleh kosong.',
     ];
 
-    public function getSchedule() {
-        $daily_activity = Schedule::where('status', 1)->get();
+    public function getSchedule($idUser) {
+        $daily_activity = Schedule::where([
+            ['id_user', '=', $idUser],
+            ['status', '=', 1]
+        ])->get();
 
         return response([
             'status' => 200,
