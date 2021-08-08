@@ -35,6 +35,20 @@ class ScheduleController extends Controller
         ]);
     }
 
+    public function getScheduleByDayUser($idUser) {
+        $todaySchedules = Schedule::with(['detailSchedule' => function($q) {
+            $q->where('day_schedule', date('l', strtotime(date('Y-m-d'))));
+        }])->whereHas('detailSchedule', function($q) {
+            $q->where('day_schedule', date('l', strtotime(date('Y-m-d'))));
+        })->where('id_user', $idUser)->get();
+
+        return response([
+            'status' => 200,
+            'message' => '',
+            'data' => $todaySchedules
+        ]);
+    }
+
     public function showSchedule($id)
     {
         try {
