@@ -65,7 +65,6 @@ class UserController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), $this->createRules(), $this->pesan);
 
-        error_log('Register : '.$request);
         if ($validator->fails()) {
             return response()->json([
                 'status' => 500,
@@ -103,6 +102,7 @@ class UserController extends Controller
         } else {
             $requestData = $request->all();
             $requestData['modidate'] = date('Y-m-d H:i:s');
+            $requestData['password'] = Hash::make($request->password);
 
             $user = User::findOrFail($id);
             $user->update($requestData);
@@ -134,6 +134,7 @@ class UserController extends Controller
         }
 
         if (Hash::check($password, $user->password)) {
+            $user->password = $password;
             $out = [
                 "status" => 200,
                 "message" => "Sign in success",
