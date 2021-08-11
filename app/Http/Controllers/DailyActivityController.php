@@ -48,7 +48,7 @@ class DailyActivityController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID DailyActivity tidak ditemukan',
+                'message' => 'Daily Activity ID not found.',
                 'data' => $id
             ], 404);
         }
@@ -72,7 +72,7 @@ class DailyActivityController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil ditambahkan.',
+                'message'=> 'Data added successfully.',
                 'data' => $daily_activity
             ], 200);
         }
@@ -98,7 +98,7 @@ class DailyActivityController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil diupdate.',
+                'message'=> 'Data updated successfully.',
                 'data' => $daily_activity
             ], 200);
         }
@@ -113,13 +113,13 @@ class DailyActivityController extends Controller
 
             return response([
                 'status' => 200,
-                'message' => 'Data berhasil dihapus.',
+                'message' => 'Data deleted successfully.',
                 'data' => $daily_activity
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID DailyActivity tidak ditemukan',
+                'message' => 'Daily Activity ID not found.',
                 'data' => $id
             ], 404);
         }

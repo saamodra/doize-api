@@ -24,7 +24,7 @@ class PomodoroController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID Pomodoro tidak ditemukan',
+                'message' => 'Pomodoro ID not found.',
                 'data' => $id
             ], 404);
         }

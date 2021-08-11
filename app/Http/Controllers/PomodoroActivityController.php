@@ -65,7 +65,7 @@ class PomodoroActivityController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID PomodoroActivity not found.',
+                'message' => 'Pomodoro Activity not found.',
                 'data' => $id
             ], 404);
         }

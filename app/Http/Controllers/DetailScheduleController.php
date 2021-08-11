@@ -84,7 +84,7 @@ class DetailScheduleController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID DetailSchedule tidak ditemukan',
+                'message' => 'Detail Schedule ID not found.',
                 'data' => $id
             ], 404);
         }
@@ -108,7 +108,7 @@ class DetailScheduleController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil ditambahkan.',
+                'message'=> 'Data added successfully.',
                 'data' => $detail_schedule
             ], 200);
         }
@@ -134,7 +134,7 @@ class DetailScheduleController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil diupdate.',
+                'message'=> 'Data updated successfully.',
                 'data' => $detail_schedule
             ], 200);
         }
@@ -148,13 +148,13 @@ class DetailScheduleController extends Controller
 
             return response([
                 'status' => 200,
-                'message' => 'Data berhasil dihapus.',
+                'message' => 'Data deleted successfully.',
                 'data' => $detail_schedule
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID DetailSchedule tidak ditemukan',
+                'message' => 'Detail Schedule ID not found',
                 'data' => $id
             ], 404);
         }

@@ -49,7 +49,7 @@ class AssignmentController extends Controller
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID Assignment tidak ditemukan',
+                'message' => 'Assignment ID not found.',
                 'data' => $id
             ], 404);
         }
@@ -73,7 +73,7 @@ class AssignmentController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil ditambahkan.',
+                'message'=> 'Data added successfully.',
                 'data' => $assignment
             ], 200);
         }
@@ -99,7 +99,7 @@ class AssignmentController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message'=> 'Data berhasil diupdate.',
+                'message'=> 'Data updated successfully.',
                 'data' => $assignment
             ], 200);
         }
@@ -114,13 +114,13 @@ class AssignmentController extends Controller
 
             return response([
                 'status' => 200,
-                'message' => 'Data berhasil dihapus.',
+                'message' => 'Data deleted successfully.',
                 'data' => $assignment
             ], 200);
         } catch(ModelNotFoundException $e) {
             return response([
                 'status' => 500,
-                'message' => 'ID Assignment tidak ditemukan',
+                'message' => 'Assignment ID not found.',
                 'data' => $id
             ], 404);
         }
