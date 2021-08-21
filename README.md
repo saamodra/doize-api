@@ -11,8 +11,9 @@ Doize App is an Android-based application that is used to make it easier for som
 2. Import database `doize.sql` to MySQL.
 3. Install `composer`
 4. Open `doize-api`
-5. Run terminal command `composer update` on `doize-api` project
-6. Run `doize-api` using `php -S 0.0.0.0:8000 -t public` command
+5. Run terminal command `composer install` on `doize-api` project
+6. Copy file `.env.example` and rename to `.env`
+7. Run `doize-api` using `php -S 0.0.0.0:8000 -t public` command
 
 
 ## API Documentation ##
