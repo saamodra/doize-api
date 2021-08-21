@@ -8,12 +8,11 @@ Doize App is an Android-based application that is used to make it easier for som
 
 ## How to install
 1. Download / clone this repository
-2. Download / clone [API Repository ](https://github.com/saamodra/doize-api)
-3. Import database `doize.sql` to MySQL.
-4. Install `composer`
-5. Open `doize-api`
-6. Run terminal command `composer update` on `doize-api` project
-7. Run `doize-api` using `php -S 0.0.0.0:8000 -t public` command
+2. Import database `doize.sql` to MySQL.
+3. Install `composer`
+4. Open `doize-api`
+5. Run terminal command `composer update` on `doize-api` project
+6. Run `doize-api` using `php -S 0.0.0.0:8000 -t public` command
 
 
 ## API Documentation ##
